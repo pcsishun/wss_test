@@ -12,4 +12,5 @@ COPY . .
 
 EXPOSE 3040
 
-CMD ["node", "index.js"]
+# CMD ["node", "index.js"]
+CMD ["/sbin/tini", "--", "node", "index.js"]

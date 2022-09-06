@@ -1,9 +1,11 @@
 FROM node:lts-alpine
 # RUN npm install -g http-server
-RUN mkdir -p /app
-WORKDIR /app
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+
 COPY package.json .
 COPY package-lock.json .
+
 RUN npm install
 COPY . .
 
