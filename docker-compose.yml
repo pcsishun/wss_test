@@ -1,0 +1,45 @@
+version: '3.7'
+
+networks:
+  net:
+    external: true
+    driver: bridge
+
+services:
+
+  frontend:
+    container_name: frontend
+    restart: always
+    build: 
+      context: ./frontend
+    ports:
+      - 5990:5990
+    networks:
+      - net
+
+  # backend:
+  #   container_name: backend
+  #   restart: always
+  #   build:
+  #     context: ./backend
+  #   ports:
+  #     - 3040:3040
+  #   # volumes:
+  #   #   - ./backend:/usr/src/app:cached
+  #   networks:
+  #     - net
+
+  nginx:
+    container_name: nginx
+    restart: always
+    image: ubuntu/nginx
+    volumes:
+      - ./nginx/conf/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/conf.d/default.conf:/etc/nginx/conf.d/default.conf
+    expose:
+      - 80
+    ports:
+      - 80:80
+    networks:
+      - net
+ 
